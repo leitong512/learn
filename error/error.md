@@ -59,7 +59,7 @@
    you only need to check the error value if you care about the result**
    
         简单
-        考虑失败，而不是成功（plan for failure, not success）
+        考虑失败，而不是成功（plan for failure, not success）有错误立即处理
         没有隐藏的控制流
         完全交给你来控制error
         Error are values
@@ -102,6 +102,10 @@
     
         Error Type 是实现了 error 接口的自定义类型。
             handlingError.go   two    
+        调用者可以使用类型断言转换成这个类型，来获取更多的上下文信息。
+        与错误值相比，错误类型的一大改进是他们能够包装底层错误以提供更多上下文。比如地址什么操作，
+        哪个路径出了什么问题。
+        
     调用者要是有类型断言和类型 switch，就要让自定义的 error 变为 public。这种模型会导致和
     调用者产生强耦合，从而导致API 变得脆弱。
     
@@ -135,3 +139,8 @@
         ways.go  
     one 有什么问题，很繁杂，错误的类型和里面的类型一样，直接写成two
     文件建议用 two
+    
+-    三、ways.go
+
+
+        建议推荐第三种
