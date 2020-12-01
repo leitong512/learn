@@ -144,3 +144,33 @@
 
 
         建议推荐第三种
+        
+### Wrap errors
+    
+    you should only handle errors once. handling an error means inspecting the error
+    value. and making a single decision.
+    Go 中的错误处理契约规定，在出现错误的情况下，不能对其他返回值得内容作出任何假设。
+    日志记录与错误无关且对调试没有帮助的信息应被视为噪音，应予以之一。记录的原因是因为某些东西失败了，
+    而日志包含了答案。
+    - The error has been logged.
+    - The application is back to 100% integrity.
+    - The current error is not reported any longer.
+    错误要被日志记录
+    应用程序处理错误，保证100%完整性
+    之后不再报告当前错误
+    
+    github.com/pkg/errors
+    
+    通过使用该包，可以向错误值添加上下文，这种方式既可以由人也可以由机器检查
+    
+    ### wrap error处理方式
+    -在你的应用代码中，使用errors.New()或errors.Errorf返回错误
+    -如果调用其他包内的函数，通常简单的直接返回
+    -如果和其他库进行协作（自己的基础库，第三方库，标准的基础库），考虑使用errors.Wrap 或者
+    errors.Wraof保存堆栈信息。同样适用于和标准库协作的时候。
+    -直接返回错误，而不是每个错误产生的地方到处打日志
+    -在程序的顶部或工作的goroutine顶部（请求入口），将堆栈信息打印出来
+    -使用 errors.Cause 获取 root error,在进行和sentinel error 判定。
+    总结：
+        
+    
