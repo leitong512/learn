@@ -1,6 +1,6 @@
-#第二课 error
+####第二课 error
  
-    Error vs Execption
+-    Error vs Exception
      
     errors.New() 返回为什么是一个指针？
     pointer.go
@@ -64,10 +64,10 @@
         完全交给你来控制error
         Error are values
         
-   Handling error
+###   Handling error
    解决error的几种套路
    
-   一、sentinel error
+-   一、sentinel error
     预定义的特定错误。使用一个特定值来表示不可能进行进一步处理的做法。对Go，我们使用特定的值来表示
     错误。
     if err == ErrSomething {
@@ -95,7 +95,7 @@
        
        对于业务错误来说会这样吗？？
        
-    二、Error Types
+-   二、Error Types
     
         Error Type 是实现了 error 接口的自定义类型。
             handlingError.go   two  
@@ -107,7 +107,7 @@
     关于出错的更多上下文，但是 error types 共享error values 许多相同的问题。
     建议是避免错误类型，或者至少避免将他们作为公共API的一部分。
     
-    三、Opaque errors
+-   三、Opaque errors
     不透明错误处理，它要求代码和调用者之间的耦合最少。因为虽知道发生了错误，但你没有能力看到错误
     的内部。作为调用者，关于操作的结果，你所知道的就是它起作用了，或者没有其作用（成功或失败）
     
@@ -117,13 +117,13 @@
         handlingError.go
     使用断言错误实现特定的行为，而不是断言错误是特定的类型或值。
     
-    几种套路：
-    一、Indented flow is for errors
+### 几种套路：
+-    一、Indented flow is for errors
         无错误的正常流程代码，将成为一条直线，而不是缩进的代码。
         ways.go  
         正常做法是demo1 ，无缩进
     
-    二、Eliminate error handling by eliminating errors
+-    二、Eliminate error handling by eliminating errors
     //通过删除错误来消除错误处理
         ways.go
         
