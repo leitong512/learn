@@ -2,6 +2,7 @@ package google
 
 import (
 	"context"
+	"encoding/json"
 	"learn/context/userip"
 	"net/http"
 )
@@ -24,4 +25,47 @@ func Search(ctx context.Context, query string) (Results, error) {
 		q.Set("userip", userIP.String())
 	}
 	req.URL.RawQuery = q.Encode()
+	var results Results
+	err = HttpDO(ctx,req, func(response *http.Response, err error) error {
+		if err != nil {
+			return err
+		}
+		defer response.Body.Close()
+
+		var data struct{
+			ResponseData struct{
+				Results []struct{
+					TitleNoFormatting string
+					URL string
+				}
+			}
+		}
+		if err := json.NewDecoder(response.Body).Decode(&data); err != nil {
+			return err
+		}
+		for _, res := range data.ResponseData.Results {
+			results = append(results, Result{
+				Title: res.TitleNoFormatting,
+				URL: res.URL,
+			})
+		}
+		return nil
+	})
+	return results,nil
+}
+
+
+func HttpDO(ctx context.Context, req *http.Request, f func(response *http.Response, err error)error) error {
+	c := make(chan error,1)
+	req = req.WithContext(ctx)
+	go func () {
+		c <- f(http.DefaultClient.Do(req))
+	}()
+	select {
+	case <- ctx.Done():
+		<-c //wait for f to return
+		return ctx.Err()
+	case err := <-c :
+		return err
+	}
 }

@@ -1,0 +1,60 @@
+Index: go.mod
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>module learn\n\ngo 1.12\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- go.mod	(revision 55177e379260b77f9e45ff7d53148af062ddbf51)
++++ go.mod	(date 1606211525762)
+@@ -1,3 +1,5 @@
+ module learn
+ 
+ go 1.12
++
++require github.com/go-redis/redis v6.15.9+incompatible
+Index: main.go
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- main.go	(date 1606825300136)
++++ main.go	(date 1606825300136)
+@@ -0,0 +1,37 @@
++package main
++
++import (
++	"fmt"
++	"time"
++)
++
++var count int
++var noteLeft int
++var noteRight int
++func main() {
++	go func() {
++		noteRight++
++		if noteLeft == 0 {
++			if count == 0 {
++				fmt.Println("testright")
++				count++
++			}
++		}
++		noteRight--
++	}()
++	go func() {
++		noteLeft++
++		for noteRight== 1 {
++
++		}
++		fmt.Println("test")
++		if count == 0 {
++			fmt.Println("test1")
++			count++
++		}
++		noteLeft--
++	}()
++
++	time.Sleep(time.Second)
++	fmt.Println("count:",count)
++}
