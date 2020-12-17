@@ -1,91 +1,356 @@
-nnoremap <SPACE> <Nop>
-let mapleader = " "
+"====================================
+" vim 内置配置
+"=====================
 
+"设置vimrc修改保存后立即生效，不用在重新打开
+"建议配置完成后将这个关闭
+
+autocmd BufWritePost $MYVIMRC source $MYVIMRC
+
+"打开行号
+set nu
+"关闭行号
+"set nonu
+"关闭兼容模式 不与vi兼容
+set nocompatible
+"打开语法高亮。自动识别代码，针对所有缓冲区中的文件启用
+syntax on
+"打开语法高亮。自动识别代码
+syntax enable
+"命令模式下，在底部显示，当前键入的命令
+set showcmd
+"支持使用鼠标
+set mouse=a
+"使用uft-8编码
+set encoding=utf-8
+"继承前一行的缩进方式，适用于多行注释
+set autoindent
+"显示光标所在的当前行号，其他行都为相对于改行的相对行号
+"set relativenumber
+"设置行宽，一行显示多少字符
+set textwidth=80
+set cc=80
+"突出显示当前列
+set cursorline
+"自动折行，即太长的行分成几行
+set wrap
+"在状态栏显示光标的当前位置（位于哪一行哪一列）
+set ruler
+"显示括号匹配
+set showmatch 
+"搜索时，高亮显示匹配结果
 set hlsearch
+"set nohlsearch
+"开启实时搜索 一遍输入一遍显示结果
 set incsearch
+"set noincsearch
+" 搜索时大小写不敏感
 set ignorecase
-set smartcase
+"tab 缩进
+"设置tab长度为4空格
+set tabstop=4
+"设置自动缩进长度为4空格
+set shiftwidth=4 softtabstop=4 expandtab
 
-set easymotion
-set surround
-
-nnoremap L $
-nnoremap H ^
-vnoremap L $
-vnoremap H ^
-nnoremap ; :
-
-" clear the highlighted search result
-nnoremap <Leader>sc :nohlsearch<CR>
-
-" move half page faster
-nnoremap <leader>d <C-d>
-nnoremap <leader>u <C-u>
-
-noremap tn gt
-nnoremap tp gT
-
-" window operation
-nnoremap <leader>ww <C-W>w
-nnoremap <leader>wd <C-W>c
-nnoremap <leader>wj <C-W>j
-nnoremap <leader>wk <C-W>k
-nnoremap <leader>wh <C-W>h
-nnoremap <leader>wl <C-W>l
-nnoremap <leader>ws <C-W>s
-nnoremap <leader>w- <C-W>s
-nnoremap <leader>wv <C-W>v
-nnoremap <leader>w\| <C-W>s
-
-" Insert mode shortCut
-inoremap <C-h> <Left>
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-inoremap <C-l> <Right>
-inoremap <C-a> <Home>
-inoremap <C-e> <End>
-inoremap <C-d> <Delete>
-
-"cpoy and paste
-nnoremap <leader>y "*y
-nnoremap <leader>p "*p
-nnoremap <leader>P "0p
-vnoremap Y "+y
+set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
+set termencoding=utf-8
+"自动提示
+set completeopt=menu
 
 
-" Quit normal mode
-nnoremap<Space>q :q<CR>
-nnoremap<Space>Q :qa!<CR>
+"定义快捷键的前缀，即<Leader>
+let mapleader=" "
+"==== 系统剪切板复制粘贴 ====
+" v 模式下复制内容到系统剪切板
+vmap <Leader>c "+yy
+" n 模式下复制一行到系统剪切板
+nmap <Leader>c "+yy
+" n 模式下粘贴系统剪切板的内容
+nmap <Leader>v "+p
+map <Leader>sc :set nohlsearch
 
-"edit vimrc
-nnoremap <leader>ve :e ~/.ideavimrc<CR>
-nnoremap <leader>vw :w!<CR>
-nnoremap <leader>vs :source ~/.ideavimrc<CR>
+syntax enable
+filetype plugin indent on " 启用自动补全
 
-" goland built in key map
-noremap <leader>a :action GotoAction<CR>
-nnoremap <leader>b :action Bookmarks<CR>
-nnoremap <leader>c :action GotoClass<CR>
-nnoremap <leader>e :action SearchEverywhere<CR>
-nnoremap <leader>f :action FindInPath<CR>
-nnoremap <leader>gc :action Git.CompareWithBranch<CR>
-nnoremap <leader>gr :action Git.ResolveConflicts<CR>
-nnoremap <leader>ga :action Annotate<CR>
-nnoremap <leader>or :action FileMenu<CR>
-nnoremap <leader>r :action RecentFiles<CR>
-nnoremap <leader>s :action FileStructPopup<CR>
+" 退出插入模式指定类型的文件自动保存
+"au InsertLeave *.go,*.sh,*.txt !write
 
-" navigation
-nnoremap gs :action GotoSuperMethod<CR>
-nnoremap gb :action JumpToLastChange<CR>
-nnoremap gi :action GotoImplementation<CR>
-nnoremap gd :action GotoDeclaration<CR>
-nnoremap gr :action RenameElement<CR>
+" 插件开始的位置
+call plug#begin('~/.vim/plugged')
 
-"Code action
-nnoremap U :action FindUsages<CR>
-nnoremap R :action RenameElement<CR>
-nnoremap == :action ReformatCode<CR>
-vnoremap = :action ReformatCode<CR>
-nnoremap cc :action CommentByLineComment<CR>
-vnoremap cc :action CommentByLineComment<CR>
+" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+" 可以快速对齐的插件
+Plug 'junegunn/vim-easy-align'
+
+" 用来提供一个导航目录的侧边栏
+"Plug 'scrooloose/nerdtree'
+
+" 可以使 nerdtree Tab 标签的名称更友好些
+Plug 'jistr/vim-nerdtree-tabs'
+
+" 可以在导航目录中看到 git 版本信息
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+" 查看当前代码文件中的变量和函数列表的插件，
+" 可以切换和跳转到代码中对应的变量和函数的位置
+" 大纲式导航, Go 需要 https://github.com/jstemmer/gotags 支持
+Plug 'majutsushi/tagbar'
+
+" 自动补全括号的插件，包括小括号，中括号，以及花括号
+Plug 'jiangmiao/auto-pairs'
+
+" Vim状态栏插件，包括显示行号，列号，文件类型，文件名，以及Git状态
+Plug 'vim-airline/vim-airline'
+
+" 有道词典在线翻译
+Plug 'ianva/vim-youdao-translater'
+
+" 代码自动完成，安装完插件还需要额外配置才可以使用
+Plug 'Valloric/YouCompleteMe'
+
+" 可以在文档中显示 git 信息
+Plug 'airblade/vim-gitgutter'
+
+" 下面两个插件要配合使用，可以自动生成代码块
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
+
+" 配色方案
+" colorscheme neodark
+Plug 'KeitaNakamura/neodark.vim'
+" colorscheme monokai
+Plug 'crusoexia/vim-monokai'
+" colorscheme github
+Plug 'acarapetis/vim-colors-github'
+" colorscheme one
+Plug 'rakr/vim-one'
+" clorscheme onedark
+Plug 'joshdick/onedark.vim'
+
+
+" go 主要插件
+Plug 'fatih/vim-go', { 'tag': '*' }
+" go 中的代码追踪，输入 gd 就可以自动跳转
+Plug 'dgryski/vim-godef'
+
+" markdown 插件
+Plug 'iamcco/mathjax-support-for-mkdp'
+Plug 'iamcco/markdown-preview.vim'
+
+Plug 'hzchirs/vim-material'
+" 插件结束的位置，插件全部放在此行上面
+call plug#end()
+
+"==============================================================================
+" 主题配色 
+"==============================================================================
+
+" 开启24bit的颜色，开启这个颜色会更漂亮一些
+set termguicolors
+" 配色方案, 可以从上面插件安装中的选择一个使用 
+colorscheme one " 主题
+set background=dark
+" 主题背景 dark-深色; light-浅色
+
+"==============================================================================
+" vim-go 插件
+"==============================================================================
+let g:go_fmt_command = "goimports" " 格式化将默认的 gofmt 替换
+let g:go_autodetect_gopath = 1
+let g:go_list_type = "quickfix"
+
+let g:go_version_warning = 1
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_generate_tags = 1
+
+let g:godef_split=2
+
+"==============================================================================
+" NERDTree 插件
+"==============================================================================
+
+" 打开和关闭NERDTree快捷键
+"map <F10> :NERDTreeToggle<CR>
+" 显示行号
+"let NERDTreeShowLineNumbers=1
+" 打开文件时是否显示目录
+"let NERDTreeAutoCenter=1
+" 是否显示隐藏文件
+"let NERDTreeShowHidden=0
+" 设置宽度
+" let NERDTreeWinSize=31
+" 忽略一下文件的显示
+"let NERDTreeIgnore=['\.pyc','\~$','\.swp']
+" 打开 vim 文件及显示书签列表
+"let NERDTreeShowBookmarks=2
+
+" 在终端启动vim时，共享NERDTree
+"let g:nerdtree_tabs_open_on_console_startup=1
+
+
+"==============================================================================
+"  majutsushi/tagbar 插件
+"==============================================================================
+
+" majutsushi/tagbar 插件打开关闭快捷键
+nmap <F9> :TagbarToggle<CR>
+
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
+
+
+"==============================================================================
+"  nerdtree-git-plugin 插件
+"==============================================================================
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ 'Ignored'   : '☒',
+    \ "Unknown"   : "?"
+    \ }
+
+let g:NERDTreeGitStatusShowIgnored = 1
+
+
+
+"==============================================================================
+"  Valloric/YouCompleteMe 插件
+"==============================================================================
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<space>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+
+"==============================================================================
+"  其他插件配置
+"==============================================================================
+
+" markdwon 的快捷键
+map <silent> <F5> <Plug>MarkdownPreview
+map <silent> <F6> <Plug>StopMarkdownPreview
+
+" tab 标签页切换快捷键
+:nn <Leader>1 1gt
+:nn <Leader>2 2gt
+:nn <Leader>3 3gt
+:nn <Leader>4 4gt
+:nn <Leader>5 5gt
+:nn <Leader>6 6gt
+:nn <Leader>7 7gt
+:nn <Leader>8 8gt
+:nn <Leader>9 8gt
+:nn <Leader>0 :tablast<CR>
+
+if filereadable("cscope.out")
+    cs add cscope.out
+endif
+
+"
+"1.下载最新内核源码包，解压至主目录下
+"
+"接下来的步骤当然可以在当前系统内核源码目录下进行，不过为了保险期间还是最好在主目录下专门创建一个存放源码的目录。下文所说的源码目录均指主目录下的源码目录。
+"
+"2.安装ctags
+"
+"使用命令：sudo apt-get install ctags
+"
+"3.安装cscope
+"
+"使用命令：sudo apt-get install cscope
+"
+"4.成标签文件
+"
+"在源码目录下通过命令make tags生成标签文件
+"
+"5.生成索引文件
+"
+"在源码目录下通过命令make cscope生成索引文件。
+"
+"6.将索引文件导入vim中
+"
+"使用命令打开vim的配置文件：sudo gedit /etc/vim/vimrc；然后在该文件下添加如下代码：
+"
+"1
+"if filereadable("cscope.out")
+"2
+"    cs add cscope.out
+"3
+"endif
+"这样每次打开vim就可以直接使用cscope了。
+"
+"使用ctags, cscope
+"
+"在命令模式输入：tag tag_name 按回车即可
+"通常tag_name可以是结构体名称，函数名称，宏变量名称等
+"tfirst:跳至第一个
+"tnext:调至下一个
+"tlast:调至最后一个
+"
+"使用cscope
+"
+"虽然ctags使用方便快捷，但有时候使用cscope更灵活，首先可以看cscope的帮助文件：
+"
+"cscope 命令:
+"add  ：添加一个新的数据库             (用法： add file|dir [pre-path] [flags])
+"find ：查询一个模式                   (用法： find c|d|e|f|g|i|s|t name)
+"c：找到调用这个函数的函数
+"d：找到被这个函数调用的函数
+"e：找到这个 egrep 模式
+"f：找到此文件夹
+"g：找到这个定义
+"i：找文件 #包括这个文件
+"s：找到这个 C 符号
+"t：找到对其的赋值
+"help ：显示此信息                     (用法： help)
+"kill ：结束一个连接                   (用法： kill #)
+"reset：重置所有连接                   (用法： reset)
+"show ：显示连接                       (用法： show)
+"通过上面的帮助文件可以发现如果想找到request_irq函数的定义处代码，即可使用这个命令：
+"cs find g request_irq来进行查找。大多数情况下查找的结果并不唯一，因为需要在多个结果中通过头文件来继续查看。
+"
+"通常是先通过cscope大致定位到头文件，再通过ctags在该头文件中详细定位。
