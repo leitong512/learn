@@ -1,38 +1,37 @@
 package main
 
 import (
-	"fmt"
-	"sync"
-	"sync/atomic"
-	"time"
+	"context"
+	"github.com/go-redis/redis/v8"
 )
 
-var wg sync.WaitGroup
-var count int32
-
 func main() {
-	i := int32(0)
-	for ; i < 10; i++ {
-		wg.Add(1)
-		go func(i int32) {
-			defer func() {
-				wg.Done()
-			}()
-			fn := func() {
-				fmt.Println(i)
-			}
-			trigger(i, fn)
-		}(i)
-	}
-	wg.Wait()
-}
-func trigger(i int32, fn func()) {
-	for {
-		if n := atomic.LoadInt32(&count); n == i {
-			fn()
-			atomic.AddInt32(&count, 1)
-			break
-		}
-		time.Sleep(time.Second)
-	}
+	key := "test"
+	client := redis.NewClient(&redis.Options{
+		Addr: "127.0.0.1:6379",
+		DB: 0,
+	})
+	client.ZAdd(context.TODO(),key,&redis.Z{
+		Member: "google.com",
+		Score: float64(9),
+	})
+	client.ZAdd(context.TODO(),key,&redis.Z{
+		Member: "baidu.com",
+		Score: float64(12),
+	})
+	client.ZAdd(context.TODO(),key,&redis.Z{
+		Member: "bing.com",
+		Score: float64(16),
+	})
+
+	//idZRange := &redis.ZRangeBy{
+	//	Max: "9",
+	//	Min: "-inf",
+	//}
+	//lists, _ := client.ZRangeByScore(context.TODO(),key,idZRange).Result()
+	//fmt.Println(lists)
+	//for _, list := range lists {
+	//	client.ZRem(context.TODO(),key,list)
+	//	fmt.Println("删除：" + list)
+	//}
 }

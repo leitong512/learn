@@ -5,14 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="921d52f9-6334-4b45-8b9f-d4641d29d7e5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/memorymodel/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shareMemoryByCommuicating/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/table.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/distributedLock/distributed_lock.go" beforeDir="false" afterPath="$PROJECT_DIR$/distributedLock/distributed_lock.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/distributedLock/distributed_lock_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/distributedLock/distributed_lock_test.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/main.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,8 +39,10 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="DefaultGoTemplateProperty" value="Go Application" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="configurable.Global.GOPATH.is.expanded" value="true" />
     <property name="configurable.Project.GOPATH.is.expanded" value="true" />
@@ -50,13 +51,22 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected="Go Build.go build learn/test">
+  <component name="RunManager" selected="Go Build.go build learn/image">
     <configuration name="go build learn" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="learn" />
       <working_directory value="$PROJECT_DIR$" />
       <kind value="PACKAGE" />
       <filePath value="$PROJECT_DIR$/main.go" />
       <package value="learn" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build learn/image" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="learn" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <filePath value="$PROJECT_DIR$/image/main.go" />
+      <package value="learn/image" />
       <directory value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
@@ -87,30 +97,23 @@
       <directory value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestDistributedLock in learn/distributedLock" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="learn" />
-      <working_directory value="$PROJECT_DIR$/distributedLock" />
-      <framework value="gotest" />
-      <kind value="PACKAGE" />
-      <package value="learn/distributedLock" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <pattern value="^\QTestDistributedLock\E$" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.go build learn/image" />
         <item itemvalue="Go Build.go build learn/test" />
         <item itemvalue="Go Build.go build learn" />
         <item itemvalue="Go Build.go build learn/shareMemoryByCommuicating" />
         <item itemvalue="Go Build.go build learn/memorymodel" />
-        <item itemvalue="Go Test.TestDistributedLock in learn/distributedLock" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add file" />
+    <option name="LAST_COMMIT_MESSAGE" value="add file" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
